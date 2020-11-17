@@ -1,32 +1,42 @@
-<div class="layui-fluid layui-anim febs-anim" id="febs-tiexinzhijing" lay-title="铁芯直径">
+<div class="layui-fluid layui-anim febs-anim" id="febs-shaobeishengwuzu" lay-title="绕组温升">
     <div class="layui-row layui-col-space8 febs-container">
         <div class="layui-col-md6 layui-col-sm6 layui-col-xs12" style="height: max-content">
             <div class="layui-card">
-                <div class="layui-card-header" id="fjdk-form-header">分接电抗计算</div>
+                <div class="layui-card-header" id="sbsw-form-header">绕组温升计算</div>
                 <div class="layui-card-body febs-table-full">
-                    <form class="layui-form layui-table-form" action="" lay-filter="tiexinzhijing-form">
+                    <form class="layui-form layui-table-form" action="" lay-filter="shaobeishengwuzu-form">
                         <div class="layui-form-item">
-                            <label class="layui-form-label">额定容量(kVA)</label>
+                            <label class="layui-form-label">经验系数K</label>
                             <div class="layui-input-block">
-                                <input name="se" autocomplete="off" class="layui-input"
-                                       type="number" step="0.01" lay-verify="required">
+                                <input name="k" autocomplete="off" class="layui-input"
+                                       type="number" lay-verify="required">
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <label class="layui-form-label">铁芯柱数</label>
-                            <!-- <div class="layui-input-block">
-                                 <input name="m2" autocomplete="off" class="layui-input"
-                                        type="number" step="0.01" lay-verify="required">
-                             </div>-->
+                            <label class="layui-form-label">经验系数n</label>
                             <div class="layui-input-block">
-                                <input type="radio" name="m2" value="2" title="单相" checked="">
-                                <input type="radio" name="m2" value="3" title="三相">
+                                <input name="n" autocomplete="off" class="layui-input"
+                                       type="number" lay-verify="required">
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <label class="layui-form-label">经验系数</label>
+                            <label class="layui-form-label">绕组散热面单位热负荷(W/m2)</label>
                             <div class="layui-input-block">
-                                <input name="kd" autocomplete="off" class="layui-input"
+                                <input name="qw" autocomplete="off" class="layui-input"
+                                       type="number" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">折算到参考温度下的绕组损耗(W)</label>
+                            <div class="layui-input-block">
+                                <input name="pw" autocomplete="off" class="layui-input"
+                                       type="number" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">绕组的有效散热面积(m2)</label>
+                            <div class="layui-input-block">
+                                <input name="sw" autocomplete="off" class="layui-input"
                                        type="number" lay-verify="required">
                             </div>
                         </div>
@@ -38,13 +48,13 @@
                             </div>
                         </div>
                         <button type="reset" class="layui-btn febs-hide" id="reset-form"></button>
-                        <button class="layui-btn febs-hide" lay-submit="" lay-filter="txzj-form-submit"
-                                id="submit-form-txzj"></button>
+                        <button class="layui-btn febs-hide" lay-submit="" lay-filter="sbsw-form-submit"
+                                id="submit-form-sbsw"></button>
                     </form>
                 </div>
                 <div class="layui-card-footer">
-                    <button class="layui-btn" id="txzj-submit">计算</button>
-                    <button class="layui-btn" id="txzj-submit-reset">清空</button>
+                    <button class="layui-btn" id="sbsw-submit">计算</button>
+                    <button class="layui-btn" id="sbsw-submit-reset">清空</button>
                 </div>
             </div>
         </div>
@@ -66,11 +76,11 @@
             validate = layui.validate,
             eleTree = layui.eleTree,
             dropdown = layui.dropdown,
-            $view = $('#febs-tiexinzhijing'),
+            $view = $('#febs-shaobeishengwuzu'),
             $query = $view.find('#query'),
             $reset = $view.find('#reset'),
-            $resetSubmit = $view.find('#txzj-submit-reset'),
-            $submit = $view.find('#txzj-submit'),
+            $resetSubmit = $view.find('#sbsw-submit-reset'),
+            $submit = $view.find('#sbsw-submit'),
             $ret = $view.find('#ret-how'),
             $searchForm = $view.find('#fenjiedian-table-form');
 
@@ -78,7 +88,7 @@
         form.render();
 
         $submit.on('click', function () {
-            $view.find('#submit-form-txzj').trigger('click');
+            $view.find('#submit-form-sbsw').trigger('click');
         });
 
         $reset.on('click', function () {
@@ -89,9 +99,9 @@
             $view.find('#reset-form').trigger('click');
         });
 
-        form.on('submit(txzj-form-submit)', function (data) {
-            febs.get(ctx + 'dk/txzj', data.field, function (ret) {
-                form.val("tiexinzhijing-form", {
+        form.on('submit(sbsw-form-submit)', function (data) {
+            febs.get(ctx + 'dk/sbsw', data.field, function (ret) {
+                form.val("shaobeishengwuzu-form", {
                     "ret": ret.data,
                 });
             })
