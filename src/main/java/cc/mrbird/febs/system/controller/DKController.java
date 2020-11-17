@@ -24,6 +24,7 @@ import java.text.NumberFormat;
 @RequiredArgsConstructor
 @RequestMapping("dk")
 public class DKController extends BaseController {
+
     /**
      * Math.sqrt()//计算平方根
      * Math.cbrt()//计算立方根
