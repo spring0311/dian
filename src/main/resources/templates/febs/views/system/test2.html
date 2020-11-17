@@ -1,0 +1,168 @@
+<style>
+    html, body {
+        overflow: auto;
+    }
+
+    table {
+        border: 1px;
+        color: black;
+    }
+
+    input {
+        border: 0;
+        outline: 0;
+    }
+
+    tr {
+        height: 40px;
+    }
+
+    div {
+        width: 680px; /*宽度设置固定值*/
+        height: 1000px;
+        margin: 10px auto;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鉴定报告</title>
+    <script language="javascript">
+        function test(fang) {
+            if (fang < 10) {
+                bdhtml = window.document.body.innerHTML;//获取当前页的html代码
+                sprnstr = "<!--startprint" + fang + "-->";//设置打印开始区域
+                eprnstr = "<!--endprint" + fang + "-->";//设置打印结束区域
+                prnhtml = bdhtml.substring(bdhtml.indexOf(sprnstr) + 18); //从开始代码向后取html
+                prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));//从结束代码向前取html
+                window.document.body.innerHTML = prnhtml;
+                window.print();
+                window.document.body.innerHTML = bdhtml;
+            } else {
+                window.print();
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="home-from">
+    <!--startprint1-->
+
+    <!--打印内容开始-->
+
+
+    <table width="670px" hight="978px" border="1px">
+        <tr>
+            <td style="width: 150px">鉴定机构名称</td>
+            <td style="width: 150px"></td>
+            <td style="width: 150px">受理人</td>
+            <td style="width: 150px"></td>
+        </tr>
+        <tr>
+            <td style="width: 150px">委托鉴定单位</td>
+            <td style="width: 150px"></td>
+            <td style="width: 150px">委托书编号</td>
+            <td style="width: 150px"></td>
+        </tr>
+    </table>
+    <table width="670px" hight="978px" border="1px">
+        <tr>
+            <td rowspan="4" style="width: 100px">送检人</td>
+            <td style="width: 70px">姓名</td>
+            <td style="width: 100px"></td>
+            <td style="width: 50px">职务</td>
+            <td style="width: 100px"></td>
+            <td style="width: 70px">证件号码</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>姓名</td>
+            <td></td>
+            <td>职务</td>
+            <td></td>
+            <td>证件号码</td>
+            <td><!--<input name="" type="text" style="width:120px;">--></td>
+        </tr>
+        <tr>
+            <td>通讯地址</td>
+            <td colspan="3"><input name="" type="text" style="width:40px;"></td>
+            <td>邮政编码</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>联系电话</td>
+            <td colspan="3"></td>
+            <td>传真号码</td>
+            <td></td>
+        </tr>
+    </table>
+    <table width="670px" hight="978px" border="1px">
+        <tr>
+            <td style="width: 160px;">案(事)件名称</td>
+            <td style="width: 160px;"></td>
+            <td style="width: 160px;">案件编号</td>
+            <td style="width: 160px;"></td>
+        </tr>
+    </table>
+    <table width="670px" hight="978px" border="1px">
+        <tr>
+            <td rowspan="2" style="width: 100px">被鉴定人情况</td>
+            <td style="width: 50px">姓名</td>
+            <td style="width: 80px"></td>
+            <td style="width: 50px">性别</td>
+            <td style="width: 50px"></td>
+            <td style="width: 50px">年龄</td>
+            <td style="width: 50px"></td>
+            <td style="width: 50px">电话</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>单位</td>
+            <td colspan="3"></td>
+            <td>地址</td>
+            <td colspan="3"></td>
+        </tr>
+    </table>
+
+    <table width="670px" hight="978px" border="1px">
+        <tr>
+            <td style="width: 100px">案(事)件情况摘要</td>
+            <td style="height: 50px">
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 100px">原鉴定情况</td>
+            <td style="height: 50px">
+            </td>
+        </tr>
+        <tr style="height: 200px">
+            <td style="width: 100px">收到的检材和样本等情况(包括名称,数量,性状,包装和方法等)</td>
+            <td>
+            </td>
+        </tr>
+        <tr style="height: 180px">
+            <td style="width: 100px">委托鉴定单位的鉴定要求和诚信声明</td>
+            <td>鉴定要求:<br/><br/><br/>
+                我单位向你鉴定机构介绍的情况客观真实,提交的检材样本等来源清楚可靠。<br/><br/><br/>
+                负责人签字:
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日
+            </td>
+        </tr>
+    </table>
+
+    <!--打印内容结束-->
+
+    <!--endprint1-->
+    <input type='button' name='button_export' title='打印1' onclick=test(1) value='打印1'>
+</div>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

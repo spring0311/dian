@@ -1,0 +1,147 @@
+<style>
+    html, body {
+        overflow: auto;
+    }
+
+    table {
+        border: 1px;
+        cellspacing: "0";
+        cellpadding: "0";
+        color: black;
+    }
+
+    input {
+        border: 0;
+        outline: 0;
+    }
+
+    tr {
+        height: 40px;
+    }
+
+    div {
+        width: 680px; /*宽度设置固定值*/
+        height: 1000px;
+        margin: 10px auto;
+    }
+</style>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div id="home-from">
+    <!--startprint1-->
+
+    <!--打印内容开始-->
+    <table width="670px" hight="978px" border="1px">
+        <tr>
+            <td style="width: 150px">鉴定机构名称</td>
+            <td style="width: 150px"></td>
+            <td style="width: 150px">受理人</td>
+            <td style="width: 150px"></td>
+        </tr>
+        <tr>
+            <td style="width: 150px">委托鉴定单位</td>
+            <td style="width: 150px"></td>
+            <td style="width: 150px">委托书编号</td>
+            <td style="width: 150px"></td>
+        </tr>
+    </table>
+    <table width="670px" hight="978px" border="1px">
+        <tr>
+            <td rowspan="4" style="width: 100px">送检人</td>
+            <td style="width: 70px">姓名</td>
+            <td style="width: 100px"></td>
+            <td style="width: 50px">职务</td>
+            <td style="width: 100px"></td>
+            <td style="width: 70px">证件号码</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>姓名</td>
+            <td></td>
+            <td>职务</td>
+            <td></td>
+            <td>证件号码</td>
+            <td><!--<input name="" type="text" style="width:120px;">--></td>
+        </tr>
+        <tr>
+            <td>通讯地址</td>
+            <td colspan="3"><input name="" type="text" style="width:40px;"></td>
+            <td>邮政编码</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>联系电话</td>
+            <td colspan="3"></td>
+            <td>传真号码</td>
+            <td></td>
+        </tr>
+    </table>
+    <table width="670px" hight="978px" border="1px">
+        <tr>
+            <td style="width: 160px;">案(事)件名称</td>
+            <td style="width: 160px;"></td>
+            <td style="width: 160px;">案件编号</td>
+            <td style="width: 160px;"></td>
+        </tr>
+    </table>
+    <table width="670px" hight="978px" border="1px">
+        <tr>
+            <td rowspan="2" style="width: 100px">被鉴定人情况</td>
+            <td style="width: 50px">姓名</td>
+            <td style="width: 80px"></td>
+            <td style="width: 50px">性别</td>
+            <td style="width: 50px"></td>
+            <td style="width: 50px">年龄</td>
+            <td style="width: 50px"></td>
+            <td style="width: 50px">电话</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>单位</td>
+            <td colspan="3"></td>
+            <td>地址</td>
+            <td colspan="3"></td>
+        </tr>
+    </table>
+
+    <table width="670px" hight="978px" border="1px">
+        <tr>
+            <td style="width: 100px">案(事)件情况摘要</td>
+            <td style="height: 50px">
+            </td>
+        </tr>
+        <tr style="height: 200px">
+            <td style="width: 100px">收到的检材和样本等情况</td>
+            <td>
+            </td>
+        </tr>
+        <tr style="height: 50px">
+            <td style="width: 100px">鉴定要求</td>
+            <td></td>
+        </tr>
+        <tr style="height: 150px">
+            <td style="width: 100px">双方对鉴定时限以及送检检材样本等使用保管和取回的约定</td>
+            <td>(1)是否同意使用本机构选用的鉴定方法 是 否<br/>
+                (2)双方对鉴定时限约定为()天<br/>
+                (3)鉴定书发布时,送检检材的处理: 取回 保管()天 由鉴定机构处置<br/>
+                (4)是否对本机构的鉴定人有回避要求 是 否<br/>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 100px">鉴定文书和相关检材的领取情况</td>
+            <td></td>
+        </tr>
+        <tr style="height: 50px">
+            <td style="width: 100px">备注</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <!--打印内容结束-->
+
+    <!--endprint1-->
+    <input type='button' name='button_export' title='打印1' onclick=test(1) value='打印1'>
+</div>
+
+</body>
+</html>
