@@ -1,0 +1,85 @@
+<div class="layui-fluid layui-anim febs-anim" id="febs-diankangshuzhi" lay-title="电抗数值">
+    <div class="layui-row layui-col-space8 febs-container">
+        <div class="layui-col-md6 layui-col-sm6 layui-col-xs12" style="height: max-content">
+            <div class="layui-card">
+                <div class="layui-card-header" id="dksz-form-header">电抗数值计算</div>
+                <div class="layui-card-body febs-table-full">
+                    <form class="layui-form layui-table-form" action="" lay-filter="diankangshuzhi-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">融冰电流</label>
+                            <div class="layui-input-block">
+                                <input name="i" autocomplete="off" class="layui-input"
+                                       type="number" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">计算结果</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="ret" autocomplete="off" class="layui-input"
+                                       id="ret-how" value="">
+                            </div>
+                        </div>
+                        <button type="reset" class="layui-btn febs-hide" id="reset-form"></button>
+                        <button class="layui-btn febs-hide" lay-submit="" lay-filter="dksz-form-submit"
+                                id="submit-form-dksz"></button>
+                    </form>
+                </div>
+                <div class="layui-card-footer">
+                    <button class="layui-btn" id="dksz-submit">计算</button>
+                    <button class="layui-btn" id="dksz-submit-reset">清空</button>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6 layui-col-sm6 layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body febs-table-full">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-th-inline="none" type="text/javascript">
+    layui.use(['dropdown', 'jquery', 'laydate', 'febs', 'form', 'eleTree', 'validate'], function () {
+        var $ = layui.jquery,
+            laydate = layui.laydate,
+            febs = layui.febs,
+            form = layui.form,
+            validate = layui.validate,
+            eleTree = layui.eleTree,
+            dropdown = layui.dropdown,
+            $view = $('#febs-diankangshuzhi'),
+            $query = $view.find('#query'),
+            $reset = $view.find('#reset'),
+            $resetSubmit = $view.find('#dksz-submit-reset'),
+            $submit = $view.find('#dksz-submit'),
+            $ret = $view.find('#ret-how'),
+            $searchForm = $view.find('#diankangshuzhi-table-form');
+
+        form.verify(validate);
+        form.render();
+
+        $submit.on('click', function () {
+            $view.find('#submit-form-dksz').trigger('click');
+        });
+
+        $reset.on('click', function () {
+            $searchForm[0].reset();
+        });
+
+        $resetSubmit.on('click', function () {
+            $view.find('#reset-form').trigger('click');
+        });
+
+        form.on('submit(dksz-form-submit)', function (data) {
+            febs.get(ctx + 'dk/dksz', data.field, function (ret) {
+                form.val("diankangshuzhi-form", {
+                    "ret": ret.data,
+                });
+            })
+            return false;
+        });
+
+
+    });
+</script>

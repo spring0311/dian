@@ -98,6 +98,11 @@ public class ViewController extends BaseController {
         return FebsUtil.view("system/electric/shaobeishengwenzu");
     }
 
+    @GetMapping(FebsConstant.VIEW_PREFIX + "diankangqi/diankangshuzhi")
+    public String diankangshuzhi() {
+        return FebsUtil.view("system/electric/diankangshuzhi");
+    }
+
 
     @GetMapping(FebsConstant.VIEW_PREFIX + "layout")
     public String layout() {
