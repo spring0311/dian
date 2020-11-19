@@ -1,35 +1,35 @@
-<div class="layui-fluid layui-anim febs-anim" id="febs-zhudiankang" lay-title="主电抗">
+<div class="layui-fluid layui-anim febs-anim" id="febs-tiexinzhongliang-by" lay-title="铁芯重量">
     <div class="layui-row layui-col-space8 febs-container">
         <div class="layui-col-md6 layui-col-sm6 layui-col-xs12" style="height: max-content">
             <div class="layui-card">
-                <div class="layui-card-header" id="zdk-form-header">主电抗计算</div>
+                <div class="layui-card-header" id="txzl-by-form-header">铁芯重量计算</div>
                 <div class="layui-card-body febs-table-full">
-                    <form class="layui-form layui-table-form" action="" lay-filter="zhudiankang-form">
+                    <form class="layui-form layui-table-form" action="" lay-filter="tiexinzhongliang-by-form">
                         <div class="layui-form-item">
-                            <label class="layui-form-label">等效导磁面积(m2)</label>
+                            <label class="layui-form-label">铁心的中心距(mm)</label>
                             <div class="layui-input-block">
-                                <input name="a" autocomplete="off" class="layui-input"
-                                       type="number" step="0.01" lay-verify="required">
-                            </div>
-                        </div>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">铁芯饼组数(不加1)</label>
-                            <div class="layui-input-block">
-                                <input name="n" autocomplete="off" class="layui-input"
-                                       type="number" step="0.01" lay-verify="required">
-                            </div>
-                        </div>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">气隙长度(m)</label>
-                            <div class="layui-input-block">
-                                <input name="aL" autocomplete="off" class="layui-input"
+                                <input name="m0" autocomplete="off" class="layui-input"
                                        type="number" lay-verify="required">
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <label class="layui-form-label">线圈最大匝数</label>
+                            <label class="layui-form-label">铁心的窗高(mm)</label>
                             <div class="layui-input-block">
-                                <input name="w" autocomplete="off" class="layui-input"
+                                <input name="h0" autocomplete="off" class="layui-input"
+                                       type="number" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">铁轭高(mm)</label>
+                            <div class="layui-input-block">
+                                <input name="h3" autocomplete="off" class="layui-input"
+                                       type="number" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">铁心柱净截面积(cm2)</label>
+                            <div class="layui-input-block">
+                                <input name="az" autocomplete="off" class="layui-input"
                                        type="number" lay-verify="required">
                             </div>
                         </div>
@@ -41,24 +41,27 @@
                             </div>
                         </div>
                         <button type="reset" class="layui-btn febs-hide" id="reset-form"></button>
-                        <button class="layui-btn febs-hide" lay-submit="" lay-filter="zdk-form-submit"
-                                id="submit-form-zdk"></button>
+                        <button class="layui-btn febs-hide" lay-submit="" lay-filter="txzl-by-form-submit"
+                                id="submit-form-txzl-by"></button>
                     </form>
                 </div>
                 <div class="layui-card-footer">
-                    <button class="layui-btn" id="zdk-submit">计算</button>
-                    <button class="layui-btn" id="zdk-submit-reset">清空</button>
+                    <button class="layui-btn" id="txzl-by-submit">计算</button>
+                    <button class="layui-btn" id="txzl-by-submit-reset">清空</button>
                 </div>
             </div>
         </div>
         <div class="layui-col-md6 layui-col-sm6 layui-col-xs12">
             <div class="layui-card">
                 <div class="layui-card-body febs-table-full">
-                    <img src="../image/zhudiankang.png"><br>
-                    式中,A等效导磁面积,单位为m2;<br>
-                    n为铁芯饼组数;<br>
-                    气隙长度,单位为m;<br>
-                    W为线圈最大匝数;
+                    芯柱重量<img src="../image/BYtiexinGz.png"><br>
+                    铁轭重&nbsp;&nbsp;&nbsp;&nbsp;<img src="../image/BYtiexinGe.png"><br>
+                    角重&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="../image/BYtiexinG3.png"><br>
+                    铁芯重&nbsp;&nbsp;&nbsp;&nbsp;<img src="../image/BYtiexinMax.png"><br>
+                    Mo表示铁心的中心距(mm);<br>
+                    Ho表示铁心的窗高(mm);<br>
+                    HΔ表示铁轭高(mm);<br>
+                    Az表示铁心柱净截面积cm2;
                 </div>
             </div>
         </div>
@@ -73,19 +76,19 @@
             validate = layui.validate,
             eleTree = layui.eleTree,
             dropdown = layui.dropdown,
-            $view = $('#febs-zhudiankang'),
+            $view = $('#febs-tiexinzhongliang-by'),
             $query = $view.find('#query'),
             $reset = $view.find('#reset'),
-            $resetSubmit = $view.find('#zdk-submit-reset'),
-            $submit = $view.find('#zdk-submit'),
+            $resetSubmit = $view.find('#txzl-by-submit-reset'),
+            $submit = $view.find('#txzl-by-submit'),
             $ret = $view.find('#ret-how'),
-            $searchForm = $view.find('#fenjiedian-table-form');
+            $searchForm = $view.find('#tiexinzhongliang-by-table-form');
 
         form.verify(validate);
         form.render();
 
         $submit.on('click', function () {
-            $view.find('#submit-form-zdk').trigger('click');
+            $view.find('#submit-form-txzl-by').trigger('click');
         });
 
         $reset.on('click', function () {
@@ -96,9 +99,9 @@
             $view.find('#reset-form').trigger('click');
         });
 
-        form.on('submit(zdk-form-submit)', function (data) {
-            febs.get(ctx + 'dk/zdk', data.field, function (ret) {
-                form.val("zhudiankang-form", {
+        form.on('submit(txzl-by-form-submit)', function (data) {
+            febs.get(ctx + 'by/txzl', data.field, function (ret) {
+                form.val("tiexinzhongliang-by-form", {
                     "ret": ret.data,
                 });
             })

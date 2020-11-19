@@ -2,7 +2,7 @@
     <div class="layui-row layui-col-space8 febs-container">
         <div class="layui-col-md6 layui-col-sm6 layui-col-xs12" style="height: max-content">
             <div class="layui-card">
-                <div class="layui-card-header" id="fjdk-form-header">分接电抗计算</div>
+                <div class="layui-card-header" id="fjdk-form-header">铁芯直径计算</div>
                 <div class="layui-card-body febs-table-full">
                     <form class="layui-form layui-table-form" action="" lay-filter="tiexinzhijing-form">
                         <div class="layui-form-item">
@@ -14,10 +14,6 @@
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">铁芯柱数</label>
-                            <!-- <div class="layui-input-block">
-                                 <input name="m2" autocomplete="off" class="layui-input"
-                                        type="number" step="0.01" lay-verify="required">
-                             </div>-->
                             <div class="layui-input-block">
                                 <input type="radio" name="m2" value="2" title="单相" checked="">
                                 <input type="radio" name="m2" value="3" title="三相">
@@ -51,7 +47,10 @@
         <div class="layui-col-md6 layui-col-sm6 layui-col-xs12">
             <div class="layui-card">
                 <div class="layui-card-body febs-table-full">
-
+                    <img src="../image/tiexinzhijing.png"><br>
+                    装有线圈的铁心柱数,单相为2,三相为3;<br>
+                    经验系数K,对于冷轧钢片与铜导线,K=0.054~0.058;铝导线,K=0.05~0.054;<br>
+                    运算结果可取附近的标准值;
                 </div>
             </div>
         </div>

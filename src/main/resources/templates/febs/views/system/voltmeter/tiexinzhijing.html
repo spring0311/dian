@@ -1,28 +1,21 @@
-<div class="layui-fluid layui-anim febs-anim" id="febs-fenjiedian" lay-title="分接电抗">
+<div class="layui-fluid layui-anim febs-anim" id="febs-tiexinzhijing-by" lay-title="铁芯直径">
     <div class="layui-row layui-col-space8 febs-container">
         <div class="layui-col-md6 layui-col-sm6 layui-col-xs12" style="height: max-content">
             <div class="layui-card">
-                <div class="layui-card-header" id="fjdk-form-header">分接电抗计算</div>
+                <div class="layui-card-header" id="txzj-by-form-header">铁芯直径计算</div>
                 <div class="layui-card-body febs-table-full">
-                    <form class="layui-form layui-table-form" action="" lay-filter="fenjiediankang-form">
+                    <form class="layui-form layui-table-form" action="" lay-filter="tiexinzhijing-by-form">
                         <div class="layui-form-item">
-                            <label class="layui-form-label">主电抗数值</label>
+                            <label class="layui-form-label">每柱容量</label>
                             <div class="layui-input-block">
-                                <input name="xm" autocomplete="off" class="layui-input"
-                                       type="number" step="0.01" lay-verify="required">
+                                <input name="sr" autocomplete="off" class="layui-input"
+                                       type="number" lay-verify="required">
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <label class="layui-form-label">分接电抗所对应的匝数</label>
+                            <label class="layui-form-label">经验系数</label>
                             <div class="layui-input-block">
-                                <input name="wf" autocomplete="off" class="layui-input"
-                                       type="number" step="0.01" lay-verify="required">
-                            </div>
-                        </div>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">线圈最大匝数</label>
-                            <div class="layui-input-block">
-                                <input name="w" autocomplete="off" class="layui-input"
+                                <input name="kd" autocomplete="off" class="layui-input"
                                        type="number" lay-verify="required">
                             </div>
                         </div>
@@ -34,23 +27,32 @@
                             </div>
                         </div>
                         <button type="reset" class="layui-btn febs-hide" id="reset-form"></button>
-                        <button class="layui-btn febs-hide" lay-submit="" lay-filter="fjdk-form-submit"
-                                id="submit-form-fjdk"></button>
+                        <button class="layui-btn febs-hide" lay-submit="" lay-filter="txzj-by-form-submit"
+                                id="submit-form-txzj-by"></button>
                     </form>
                 </div>
                 <div class="layui-card-footer">
-                    <button class="layui-btn" id="fjdk-submit">计算</button>
-                    <button class="layui-btn" id="fjdk-submit-reset">清空</button>
+                    <button class="layui-btn" id="txzj-by-submit">计算</button>
+                    <button class="layui-btn" id="txzj-by-submit-reset">清空</button>
                 </div>
             </div>
         </div>
         <div class="layui-col-md6 layui-col-sm6 layui-col-xs12">
             <div class="layui-card">
                 <div class="layui-card-body febs-table-full">
-                    <img src="../image/DKfenjiediankang.png"><br>
-                    式中,Wf为分接电抗所对应的匝数;<br>
-                    W为线圈最大匝数;<br>
-                    Xm为主电抗;
+                    <img src="../image/BYtiexinzhijing.png"><br>
+                    Sr,每柱容量(kVA);<br>
+                    D,铁心直径 (mm);<br>
+                    经验系数K:(取值如下):<br>
+                    <hr>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;铝绕组冷轧片 &nbsp;&nbsp;&nbsp;铜绕组冷轧片<br>
+                    两绕组或三绕组&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 50 - 55
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;55 - 60<br>
+                    <hr>
+                    对于三相双绕组变压器Sr=Sn/3;<br>
+                    对于单相双绕组变压器Sr=Sn/2;
                 </div>
             </div>
         </div>
@@ -65,19 +67,19 @@
             validate = layui.validate,
             eleTree = layui.eleTree,
             dropdown = layui.dropdown,
-            $view = $('#febs-fenjiedian'),
+            $view = $('#febs-tiexinzhijing-by'),
             $query = $view.find('#query'),
             $reset = $view.find('#reset'),
-            $resetSubmit = $view.find('#fjdk-submit-reset'),
-            $submit = $view.find('#fjdk-submit'),
+            $resetSubmit = $view.find('#txzj-by-submit-reset'),
+            $submit = $view.find('#txzj-by-submit'),
             $ret = $view.find('#ret-how'),
-            $searchForm = $view.find('#fenjiedian-table-form');
+            $searchForm = $view.find('#tiexinzhijing-by-table-form');
 
         form.verify(validate);
         form.render();
 
         $submit.on('click', function () {
-            $view.find('#submit-form-fjdk').trigger('click');
+            $view.find('#submit-form-txzj-by').trigger('click');
         });
 
         $reset.on('click', function () {
@@ -88,9 +90,9 @@
             $view.find('#reset-form').trigger('click');
         });
 
-        form.on('submit(fjdk-form-submit)', function (data) {
-            febs.get(ctx + 'dk/fjdk', data.field, function (ret) {
-                form.val("fenjiediankang-form", {
+        form.on('submit(txzj-by-form-submit)', function (data) {
+            febs.get(ctx + 'by/txzj', data.field, function (ret) {
+                form.val("tiexinzhijing-by-form", {
                     "ret": ret.data,
                 });
             })

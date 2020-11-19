@@ -74,7 +74,7 @@ public class ViewController extends BaseController {
     }
 
     /**
-     * 电视图
+     * 电视图 电抗
      *
      * @return
      */
@@ -101,6 +101,31 @@ public class ViewController extends BaseController {
     @GetMapping(FebsConstant.VIEW_PREFIX + "diankangqi/diankangshuzhi")
     public String diankangshuzhi() {
         return FebsUtil.view("system/electric/diankangshuzhi");
+    }
+
+    /**
+     * 电视图 电压
+     *
+     * @return
+     */
+    @GetMapping(FebsConstant.VIEW_PREFIX + "bianyaqi/tiexinzhijing")
+    public String BYtiexinzhijing() {
+        return FebsUtil.view("system/voltmeter/tiexinzhijing");
+    }
+
+    @GetMapping(FebsConstant.VIEW_PREFIX + "bianyaqi/tiexinzhongliang")
+    public String tiexinzhongliang() {
+        return FebsUtil.view("system/voltmeter/tiexinzhongliang");
+    }
+
+    @GetMapping(FebsConstant.VIEW_PREFIX + "bianyaqi/dianzusunhao")
+    public String dianzusunhao() {
+        return FebsUtil.view("system/voltmeter/dianzusunhao");
+    }
+
+    @GetMapping(FebsConstant.VIEW_PREFIX + "bianyaqi/shaozuwensheng")
+    public String shaozuwensheng() {
+        return FebsUtil.view("system/voltmeter/shaozuwensheng");
     }
 
 

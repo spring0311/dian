@@ -12,10 +12,10 @@
                                        type="number" lay-verify="required">
                             </div>
                         </div>
-                        <div class="layui-form-item">
+                        <div class="layui-form-item layui-form-text">
                             <label class="layui-form-label">计算结果</label>
                             <div class="layui-input-block">
-                                <input type="text" name="ret" autocomplete="off" class="layui-input"
+                                <input name="ret" autocomplete="off" class="layui-textarea"
                                        id="ret-how" value="">
                             </div>
                         </div>
@@ -33,7 +33,12 @@
         <div class="layui-col-md6 layui-col-sm6 layui-col-xs12">
             <div class="layui-card">
                 <div class="layui-card-body febs-table-full">
-
+                    电抗数值计算：Zadj=U/(I-1)-( Z0+ Zline)<br>
+                    融冰电流可用键盘输入,一般在360A左右,融冰电流越大,对应电抗器的阻抗越小,融冰电流可以在300A-500A之间设定数值;<br>
+                    U=5778 （电压数值，单位为V）<br>
+                    Z0=1.3 (接地变压器的阻抗大小，单位为Ω)<br>
+                    Zline=1.71（线路的阻抗大小为1.71，单位为Ω)<br>
+                    <img src="../image/DKshuzhiduiying.png"><br>
                 </div>
             </div>
         </div>
