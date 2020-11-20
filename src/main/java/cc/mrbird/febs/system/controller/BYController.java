@@ -68,7 +68,8 @@ public class BYController extends BaseController {
         double i12 = Math.pow(dianZuSunHao.getI1(), 2);
         double i22 = Math.pow(dianZuSunHao.getI2(), 2);
         double p = 3 * i12 * r1 + 3 * i22 * r2;
-        return new FebsResponse().success().data(getNumberFormat(p));
+        String ret = "一次侧绕组电阻:" + getNumberFormat(r1) + ";二次侧绕组电阻:" + getNumberFormat(r2) + ";电阻损耗:" + getNumberFormat(p);
+        return new FebsResponse().success().data(ret);
     }
 
 
