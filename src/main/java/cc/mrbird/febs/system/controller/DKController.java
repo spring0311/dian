@@ -89,11 +89,10 @@ public class DKController extends BaseController {
     @GetMapping("sbsw")
     public FebsResponse shaozushengwen(ShaoBeiWenSheng shaoBeiWenSheng) {
         System.err.println(shaoBeiWenSheng);
-        if (shaoBeiWenSheng.getQw() == null || "".equals(shaoBeiWenSheng.getQw())) {
-            double qw = shaoBeiWenSheng.getPw() / shaoBeiWenSheng.getSw();
-            shaoBeiWenSheng.setQw(qw);
-        }
-        double qwn = Math.pow(shaoBeiWenSheng.getQw(), shaoBeiWenSheng.getN());
+       /* if (shaoBeiWenSheng.getQw() == null || "".equals(shaoBeiWenSheng.getQw())) {
+        }*/
+        double qw = shaoBeiWenSheng.getPw() / shaoBeiWenSheng.getSw();
+        double qwn = Math.pow(qw, shaoBeiWenSheng.getN());
         double ret = shaoBeiWenSheng.getK() * qwn;
         return new FebsResponse().success().data(getNumberFormat(ret));
     }
