@@ -1,0 +1,148 @@
+<div class="layui-fluid layui-anim febs-anim" id="febs-dianzusunhao-by" lay-title="电阻损耗">
+    <div class="layui-row layui-col-space8 febs-container">
+        <div class="layui-col-md6 layui-col-sm6 layui-col-xs12" style="height: max-content">
+            <div class="layui-card" style="height: 750px">
+                <div class="layui-card-header" id="dzsh-by-form-header">电阻损耗计算</div>
+                <div class="layui-card-body febs-table-full">
+                    <form class="layui-form layui-table-form" action="" lay-filter="dianzusunhao-by-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">一次侧绕组平均直径(m)</label>
+                            <div class="layui-input-block">
+                                <input name="dp1" autocomplete="off" class="layui-input"
+                                       type="number" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">一次导线截面积(mm<sup>2</sup>)</label>
+                            <div class="layui-input-block">
+                                <input name="sh" autocomplete="off" class="layui-input"
+                                       type="number" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">一次侧绕组匝数</label>
+                            <div class="layui-input-block">
+                                <input name="w1" autocomplete="off" class="layui-input"
+                                       type="number" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">一次侧实际相电流</label>
+                            <div class="layui-input-block">
+                                <input name="i1" autocomplete="off" class="layui-input"
+                                       type="number" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">二次侧绕组平均直径(m)</label>
+                            <div class="layui-input-block">
+                                <input name="dp2" autocomplete="off" class="layui-input"
+                                       type="number" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">二次导线截面积(mm<sup>2</sup>)</label>
+                            <div class="layui-input-block">
+                                <input name="sl" autocomplete="off" class="layui-input"
+                                       type="number" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">二次侧绕组匝数</label>
+                            <div class="layui-input-block">
+                                <input name="w2" autocomplete="off" class="layui-input"
+                                       type="number" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">二次侧实际相电流</label>
+                            <div class="layui-input-block">
+                                <input name="i2" autocomplete="off" class="layui-input"
+                                       type="number" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">计算结果</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="ret" autocomplete="off" class="layui-input"
+                                       id="ret-how" value="">
+                            </div>
+                        </div>
+                        <button type="reset" class="layui-btn febs-hide" id="reset-form"></button>
+                        <button class="layui-btn febs-hide" lay-submit="" lay-filter="dzsh-by-form-submit"
+                                id="submit-form-dzsh-by"></button>
+                    </form>
+                </div>
+                <div class="layui-card-footer">
+                    <button class="layui-btn" id="dzsh-by-submit">计算</button>
+                    <button class="layui-btn" id="dzsh-by-submit-reset">清空</button>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6 layui-col-sm6 layui-col-xs12">
+            <div class="layui-card" style="height: 750px">
+                <div class="layui-card-body febs-table-full">
+                    <div class="layui-card-body febs-table-full">
+                        <img src="../image/BYdianzuR1.png"><br>
+                        SH,一次侧导线截面积(mm<sup>2</sup>);<br>
+                        Dp1,一次侧绕组平均直径(m);<br>
+                        W1,匝数<br>
+                        <hr>
+                        <img src="../image/BYdianzuR2.png"><br>
+                        SL,二次侧导线截面积(mm<sup>2</sup>);<br>
+                        Dp2,二次侧绕组平均直径(m);<br>
+                        W2,匝数<br>
+                        <hr>
+                        P,电阻系数,铜导线电阻系数P=0.02135(Ω.mm<sup>2</sup>/m);<br>
+                        I1,I2分别表示一次侧和二次侧的实际相电流;<br>
+                        电阻损耗:<img src="../image/BYdianzu.png"><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-th-inline="none" type="text/javascript">
+    layui.use(['dropdown', 'jquery', 'laydate', 'febs', 'form', 'eleTree', 'validate'], function () {
+        var $ = layui.jquery,
+            laydate = layui.laydate,
+            febs = layui.febs,
+            form = layui.form,
+            validate = layui.validate,
+            eleTree = layui.eleTree,
+            dropdown = layui.dropdown,
+            $view = $('#febs-dianzusunhao-by'),
+            $query = $view.find('#query'),
+            $reset = $view.find('#reset'),
+            $resetSubmit = $view.find('#dzsh-by-submit-reset'),
+            $submit = $view.find('#dzsh-by-submit'),
+            $ret = $view.find('#ret-how'),
+            $searchForm = $view.find('#dianzusunhao-by-table-form');
+
+        form.verify(validate);
+        form.render();
+
+        $submit.on('click', function () {
+            $view.find('#submit-form-dzsh-by').trigger('click');
+        });
+
+        $reset.on('click', function () {
+            $searchForm[0].reset();
+        });
+
+        $resetSubmit.on('click', function () {
+            $view.find('#reset-form').trigger('click');
+        });
+
+        form.on('submit(dzsh-by-form-submit)', function (data) {
+            febs.get(ctx + 'by/dzsh', data.field, function (ret) {
+                form.val("dianzusunhao-by-form", {
+                    "ret": ret.data,
+                });
+            })
+            return false;
+        });
+
+
+    });
+</script>

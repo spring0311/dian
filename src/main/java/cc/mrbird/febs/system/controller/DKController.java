@@ -2,10 +2,8 @@ package cc.mrbird.febs.system.controller;
 
 import cc.mrbird.febs.common.controller.BaseController;
 import cc.mrbird.febs.common.entity.FebsResponse;
-import cc.mrbird.febs.system.entity.FenJieDianKang;
-import cc.mrbird.febs.system.entity.ShaoBeiWenSheng;
-import cc.mrbird.febs.system.entity.TieXinZhiJing;
-import cc.mrbird.febs.system.entity.ZhuDianKang;
+import cc.mrbird.febs.system.entity.*;
+import cc.mrbird.febs.system.service.IViService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +23,8 @@ import java.text.NumberFormat;
 @RequestMapping("dk")
 public class DKController extends BaseController {
 
+    private final IViService viService;
+
     /**
      * Math.sqrt()//计算平方根
      * Math.cbrt()//计算立方根
@@ -34,6 +34,8 @@ public class DKController extends BaseController {
      */
 
     /**
+     * 分接电抗计算
+     *
      * @param fenJieDianKang
      * @return
      */
@@ -47,6 +49,12 @@ public class DKController extends BaseController {
         return new FebsResponse().success().data(getNumberFormat(ret));
     }
 
+    /**
+     * 铁芯直径
+     *
+     * @param tieXinZhiJing
+     * @return
+     */
     @GetMapping("txzj")
     public FebsResponse tiexinzhijing(TieXinZhiJing tieXinZhiJing) {
         System.err.println(tieXinZhiJing);
@@ -58,6 +66,12 @@ public class DKController extends BaseController {
         return new FebsResponse().success().data(getNumberFormat(ret));
     }
 
+    /**
+     * 主电抗
+     *
+     * @param zhuDianKang
+     * @return
+     */
     @GetMapping("zdk")
     public FebsResponse zhudiankang(ZhuDianKang zhuDianKang) {
         System.err.println(zhuDianKang);
@@ -66,18 +80,44 @@ public class DKController extends BaseController {
         return new FebsResponse().success().data(getNumberFormat(ret));
     }
 
+    /**
+     * 绕组温升计算
+     *
+     * @param shaoBeiWenSheng
+     * @return
+     */
     @GetMapping("sbsw")
     public FebsResponse shaozushengwen(ShaoBeiWenSheng shaoBeiWenSheng) {
         System.err.println(shaoBeiWenSheng);
-        if (shaoBeiWenSheng.getQw() == null || "".equals(shaoBeiWenSheng.getQw())) {
-            double qw = shaoBeiWenSheng.getPw() / shaoBeiWenSheng.getSw();
-            shaoBeiWenSheng.setQw(qw);
-        }
-        double qwn = Math.pow(shaoBeiWenSheng.getQw(), shaoBeiWenSheng.getN());
+       /* if (shaoBeiWenSheng.getQw() == null || "".equals(shaoBeiWenSheng.getQw())) {
+        }*/
+        double qw = shaoBeiWenSheng.getPw() / shaoBeiWenSheng.getSw();
+        double qwn = Math.pow(qw, shaoBeiWenSheng.getN());
         double ret = shaoBeiWenSheng.getK() * qwn;
         return new FebsResponse().success().data(getNumberFormat(ret));
     }
 
+    /**
+     * 电抗数值计算
+     *
+     * @param dianKangShuZhi
+     * @return
+     */
+    @GetMapping("dksz")
+    public FebsResponse diankangshuzhi(DianKangShuZhi dianKangShuZhi) {
+        System.err.println(dianKangShuZhi);
+        Double retD = dianKangShuZhi.getU() / (dianKangShuZhi.getI() - 1) - (dianKangShuZhi.getZ0() + dianKangShuZhi.getZLine());
+        Vi vi = viService.getOneVi(retD);
+        String ret = "位置:" + vi.getHere() + ",电压:" + vi.getVoltage() + ",电流:" + vi.getElectricity() + ",损耗:" + vi.getEnergy() + ",实测电抗:" + vi.getReactor();
+        return new FebsResponse().success().data(ret);
+    }
+
+    /**
+     * 保留两位
+     *
+     * @param dou
+     * @return
+     */
     private String getNumberFormat(double dou) {
         NumberFormat nf = NumberFormat.getNumberInstance();
         nf.setMaximumFractionDigits(2);

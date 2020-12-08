@@ -1,0 +1,104 @@
+<div class="layui-fluid layui-anim febs-anim" id="febs-tiexinzhijing-by" lay-title="铁芯直径">
+    <div class="layui-row layui-col-space8 febs-container">
+        <div class="layui-col-md6 layui-col-sm6 layui-col-xs12" style="height: max-content">
+            <div class="layui-card" style="height: 310px">
+                <div class="layui-card-header" id="txzj-by-form-header">铁芯直径计算</div>
+                <div class="layui-card-body febs-table-full">
+                    <form class="layui-form layui-table-form" action="" lay-filter="tiexinzhijing-by-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">每柱容量</label>
+                            <div class="layui-input-block">
+                                <input name="sr" autocomplete="off" class="layui-input"
+                                       type="number" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">经验系数</label>
+                            <div class="layui-input-block">
+                                <input name="kd" autocomplete="off" class="layui-input"
+                                       type="number" lay-verify="required">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">计算结果</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="ret" autocomplete="off" class="layui-input"
+                                       id="ret-how" value="">
+                            </div>
+                        </div>
+                        <button type="reset" class="layui-btn febs-hide" id="reset-form"></button>
+                        <button class="layui-btn febs-hide" lay-submit="" lay-filter="txzj-by-form-submit"
+                                id="submit-form-txzj-by"></button>
+                    </form>
+                </div>
+                <div class="layui-card-footer">
+                    <button class="layui-btn" id="txzj-by-submit">计算</button>
+                    <button class="layui-btn" id="txzj-by-submit-reset">清空</button>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md6 layui-col-sm6 layui-col-xs12">
+            <div class="layui-card" style="height: 310px">
+                <div class="layui-card-body febs-table-full">
+                    <img src="../image/BYtiexinzhijing.png"><br>
+                    Sr,每柱容量(kVA);<br>
+                    D,铁心直径 (mm);<br>
+                    经验系数K:(取值如下):<br>
+                    <hr>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;铝绕组冷轧片 &nbsp;&nbsp;&nbsp;铜绕组冷轧片<br>
+                    两绕组或三绕组&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 50 - 55
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;55 - 60<br>
+                    <hr>
+                    对于三相双绕组变压器Sr=Sn/3;<br>
+                    对于单相双绕组变压器Sr=Sn/2;
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script data-th-inline="none" type="text/javascript">
+    layui.use(['dropdown', 'jquery', 'laydate', 'febs', 'form', 'eleTree', 'validate'], function () {
+        var $ = layui.jquery,
+            laydate = layui.laydate,
+            febs = layui.febs,
+            form = layui.form,
+            validate = layui.validate,
+            eleTree = layui.eleTree,
+            dropdown = layui.dropdown,
+            $view = $('#febs-tiexinzhijing-by'),
+            $query = $view.find('#query'),
+            $reset = $view.find('#reset'),
+            $resetSubmit = $view.find('#txzj-by-submit-reset'),
+            $submit = $view.find('#txzj-by-submit'),
+            $ret = $view.find('#ret-how'),
+            $searchForm = $view.find('#tiexinzhijing-by-table-form');
+
+        form.verify(validate);
+        form.render();
+
+        $submit.on('click', function () {
+            $view.find('#submit-form-txzj-by').trigger('click');
+        });
+
+        $reset.on('click', function () {
+            $searchForm[0].reset();
+        });
+
+        $resetSubmit.on('click', function () {
+            $view.find('#reset-form').trigger('click');
+        });
+
+        form.on('submit(txzj-by-form-submit)', function (data) {
+            febs.get(ctx + 'by/txzj', data.field, function (ret) {
+                form.val("tiexinzhijing-by-form", {
+                    "ret": ret.data,
+                });
+            })
+            return false;
+        });
+
+
+    });
+</script>

@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="FEBS-Shiro:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>FEBS-Shiro</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="FEBS-Shiro-2.0.war">
+      <element id="artifact" artifact-name="FEBS-Shiro:war exploded" />
+    </root>
+  </artifact>
+</component>

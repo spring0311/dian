@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="dian">
+    <output-path>$PROJECT_DIR$/out/artifacts/dian</output-path>
+    <root id="archive" name="FEBS-Shiro_war.war">
+      <element id="artifact" artifact-name="FEBS-Shiro:war exploded" />
+    </root>
+  </artifact>
+</component>
