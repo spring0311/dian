@@ -13,13 +13,20 @@
     <link rel="stylesheet" th:href="@{febs/css/login.css(t=2)}" media="all">
     <link rel="icon" th:href="@{febs/images/favicon.ico}" type="image/x-icon"/>
 </head>
+<style>
+    .logo-login {
+        line-height: normal !important;
+    }
+</style>
 <body>
 <div id="febs-login" lay-title="登录">
     <div class="login-wrap">
         <div class="layui-container">
             <div class="layui-row">
                 <div class="layui-col-xs12 layui-col-lg4 layui-col-lg-offset4 febs-tc">
-                    <div class="layui-logo"><span>电力参数计算系统</span></div>
+                    <div class="layui-logo logo-login">
+                        <span>架空线路在线融冰科技项目<br>配电变压器设计优化软件</span>
+                    </div>
                 </div>
                 <div class="layui-col-xs12 layui-col-lg4 layui-col-lg-offset4" id="login-div">
                     <div class="layui-form" lay-filter="login-form">
